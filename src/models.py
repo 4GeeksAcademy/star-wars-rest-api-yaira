@@ -4,11 +4,11 @@ db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(80), unique=False, nullable=False)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    phone_number = db.Column(db.String(10), unique=True, nullable=False)
-    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+    user_email = db.Column(db.String(120), unique=True, nullable=False)
+    user_password = db.Column(db.String(80), unique=False, nullable=False)
+    user_username = db.Column(db.String(80), unique=True, nullable=False)
+    user_phone_number = db.Column(db.String(10), unique=True, nullable=False)
+    user_is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     favorites = db.relationship('Favorites', backref='user')
 
     def __repr__(self):

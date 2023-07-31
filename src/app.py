@@ -56,12 +56,12 @@ def Get_users():
 def create_user():
     user = User()
     data = request.get_json()
-    user.username = data.get('username')
-    user.email = data.get('email')
-    user.password = data.get('password')
-    user.phone_number = data.get('phone_number')
+    user_username = data.get('user_username')
+    user_email = data.get('user_email')
+    user_password = data.get('user_password')
+    user_phone_number = data.get('user_phone_number')
 
-    if not user.username or not user.email or not user.password or not user.phone_number:
+    if not user_username or not user_email or not user_password or not user_phone_number:
         return jsonify(message='Missing required fields'), 400
 
     return jsonify(user.serialize()), 201
@@ -76,7 +76,7 @@ def user_faves():
 
 @app.route('/user/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
-    user = User(email = request.get_json()['user_email'],password = request.get_json()['user_password'], id= user_id)
+    user = User(user_email = request.get_json()['user_email'],user_password = request.get_json()['user_password'], id= user_id)
     if user is None:
         return jsonify('User not found')
     db.session.delete(user)
