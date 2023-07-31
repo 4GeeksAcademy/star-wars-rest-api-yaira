@@ -52,19 +52,22 @@ def Get_users():
     return jsonify(all_users), 200
 
 
-@app.route('/user', methods=['POST'])
+@app.route('/new-user', methods=['POST'])
 def create_user():
-    user = User()
     data = request.get_json()
-    user_username = data.get('user_username')
     user_email = data.get('user_email')
     user_password = data.get('user_password')
+    user_username = data.get('user_username')
     user_phone_number = data.get('user_phone_number')
+    user_is_active = data.get('user_is_active')
+    new_user = User(user_email=user_email, user_password=user_password, user_username=user_username, user_phone_number=user_phone_number,user_is_active=user_is_active)
+    db.session.add(new_user)
+    db.session.commit()
 
     if not user_username or not user_email or not user_password or not user_phone_number:
         return jsonify(message='Missing required fields'), 400
 
-    return jsonify(user.serialize()), 201
+    return jsonify('new user created'), 201
 
 
 @app.route('/user/favorites', methods=['GET'])

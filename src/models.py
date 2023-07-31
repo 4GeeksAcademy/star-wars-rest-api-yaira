@@ -8,7 +8,7 @@ class User(db.Model):
     user_password = db.Column(db.String(80), unique=False, nullable=False)
     user_username = db.Column(db.String(80), unique=True, nullable=False)
     user_phone_number = db.Column(db.String(10), unique=True, nullable=False)
-    user_is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+    user_is_active = db.Column(db.Boolean(), unique=False, nullable=True)
     favorites = db.relationship('Favorites', backref='user')
 
     def __repr__(self):
@@ -23,7 +23,7 @@ class User(db.Model):
     
 class Planets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Integer, nullable=False)
+    name = db.Column(db.String(80), nullable=False)
     climate = db.Column(db.String(50))
     orbit = db.Column(db.String(50))
     population = db.Column(db.String(50))
@@ -43,7 +43,7 @@ class Planets(db.Model):
 
 class People(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Integer, nullable=False)
+    name = db.Column(db.String(80), nullable=False)
     sex = db.Column(db.String(50))
     eyes = db.Column(db.String(50))
     height = db.Column(db.String(50))
