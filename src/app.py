@@ -64,7 +64,7 @@ def create_user():
     db.session.add(new_user)
     db.session.commit()
 
-    if not user_username or not user_email or not user_password or not user_phone_number:
+    if not user_username or not user_email or not user_password or not user_phone_number or not user_is_active:
         return jsonify(message='Missing required fields'), 400
 
     return jsonify('new user created'), 201
